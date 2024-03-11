@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>exercice 1</h1>
+    <button onclick="prompty()">Click here</button>
+    <p id="demo"></p>
+
+    <h1>exercice 2</h1>
+    <button onclick="sum()">Sum</button>
+
+    <h1>exercice 3</h1>
+    <button onclick="budget()">Check Budget</button>
+
+    <h1>exercice 4</h1>
+    <button onclick="ttc()">TTC price</button>
+
+    <h1>exercice 5</h1>
+    <button onclick="ttctva()">TTC price 2</button>
+
+    <h1>exercice 6</h1>
+    <button onclick="ttcp()">TTC price 3</button>
+    <div id="result"></div>
+
+    <h1>exercice 7</h1>
+    <body>
+        <h1>Mes <span>cocktails préférés</span></h1>
+        <p>Mojito</p>
+        <p>Gin Fizz</p>
+        <p>Bloody mary<p>
+        <p>Long Island Iced Tea</p>
+        <p>Mais si je ne devais qu'en retenir qu'un : <strong id="cocktail"></strong></p>
+       </body>
+    <button onclick="cocktails()">Best One</button>
+
+    <h1>exercice 8</h1>
+    <table border="1px">
+        <tbody>
+            <tr>
+                <td>nom</td>
+                <td>age</td>
+                <td>departement</td>
+            </tr>
+            <tr>
+                <td>BLALI</td>
+                <td>19</td>
+                <td>CS</td>
+            </tr>
+            <tr>
+                <td>Ahmed</td>
+                <td>23</td>
+                <td>MSN</td>
+            </tr>
+            <tr>
+                <td>kadi</td>
+                <td>20</td>
+                <td>GTI</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h1>exercice 9</h1>
+    <button onclick="table()">construct table</button>
+
+    <h1>exercice 10</h1>
+    <button onclick="randomGenerator()">Random Generator</button>
+
+    <h1>exercice 11</h1>
+    <button onclick="backgroundColor()">Change background color</button>
+
+    <h1>exercice 12</h1>
+    <button onclick="image()">Random photo Generator</button>
+
+    <script>
+        function sum(){
+            let a = parseInt(prompt("enter number a: "));
+            let b = parseInt(prompt("enter number b: "));
+            if (!isNaN(a) && !isNaN(b)) {
+                let result = a + b;
+                alert("la somme de " + a + " et " +b+ " est: " + result);
+            }else{
+                alert("svp entrez des nombres valides");
+            }
+        }
+        function prompty(){
+            let person = prompt("Please enter your name");
+            if(person != null){
+                alert("Good morning " + person + "! How are you ?"); 
+            }
+        }
+        function budget(){
+            let budget = parseFloat(prompt("enter your budget"));
+            let achats = parseFloat(prompt("enter your purchases"));
+            if(!isNaN(budget) && !isNaN(achats)){
+                if(budget >= achats){
+                    alert("You can purchase the products");
+                }else{
+                    alert("You can not purchase the products");
+                }
+            }else{
+                alert("Please enter valid values");
+            }
+        }
+
+        function ttc(){
+            let price = parseFloat(prompt("entrez le prix HT"));
+            if(!isNaN(price)){
+                document.body.innerText = "Le prix TTC est de: " + 1.2*price +"MAD";
+            }else{
+                document.body.innerText = "Veuillez entrer un prix valide.";
+            }
+        }
+
+        function ttctva(){
+            let price = parseFloat(prompt("entrez le prix HT"));
+            let taux = parseFloat(prompt("entrez le taux du TVA en pourcentage"));
+            if(!isNaN(price) && !isNaN(taux)){
+                document.body.innerText = "Le prix TTC est de: " + (1+taux/100)*price +"MAD";
+            }else{
+                document.body.innerText = "Veuillez entrer des valeurs valide.";
+            }
+        }
+        function ttcp(){
+            let price = parseFloat(prompt("entrez le prix HT"));
+            let taux = parseFloat(prompt("entrez le taux du TVA en pourcentage"));
+            if(!isNaN(price) && !isNaN(taux)){
+                var priceTTC = price*(taux/100 + 1);
+                var resultatElement = document.getElementById("result");
+                if(priceTTC>100){
+                    resultatElement.innerHTML ="<span style='color:red;'>" + priceTTC.toFixed(2) + "MAD</span>";
+                }else{
+                    resultatElement.innerHTML ="<span style='color:green;'>" + priceTTC.toFixed(2) + "MAD</span>";
+                }
+            }else{
+                document.body.innerText = "Veuillez entrer des valeurs valide.";
+            }
+            
+        }
+        function cocktails(){
+            var cocktail = document.getElementById("cocktail");
+            cocktail.innerText = "Long Island Iced Tea";
+        }
+        function table(){
+            var x = parseInt(prompt("Entrez le nombre de lignes :"));
+            var y = parseInt(prompt("Entrez le nombre de colonnes :"));
+
+            if (!isNaN(lignes) && !isNaN(colonnes) && lignes > 0 && colonnes > 0) {
+                var tableauHTML = "<table border='1'>"; 
+                for (var i = 0; i < x; i++) {
+                    tableauHTML += "<tr>";
+                    for (var j = 0; j < y; j++) {
+                        tableauHTML += "<td>Cell (" +i+ ", " +j+ ")</td>"
+                    }
+                    tableauHTML += "</tr>";
+                }
+                tableauHTML += "</table>";
+
+                document.body.innerHTML = tableauHTML;
+            } else {
+                document.body.innerHTML = "Veuillez entrer des nombres entiers positifs.";
+            }
+        }
+        function randomGenerator(){
+            var listHTML = "<ul>";
+            for(var j=0;j<10;j++){
+                listHTML += "<li>"+Math.floor(Math.random() * 100)+"</li>";
+            }
+            listHTML += "</ul>"; 
+            document.body.innerHTML = listHTML;     
+        }
+        function backgroundColor(){
+            var rouge = Math.floor(Math.random() * 256);
+            var vert = Math.floor(Math.random() * 256);
+            var bleu = Math.floor(Math.random() * 256);
+            document.body.style.background = 'rgb(' + rouge + ',' + vert + ',' + bleu + ')';
+        }
+        function image(){
+            
+            for(var i=0;i<12;i++){
+                var id = Math.floor(Math.random() *1000);
+                var l = Math.floor(Math.random() * 500);
+                var r =Math.floor(Math.random() * 500);
+                var img = document.createElement("img");
+                img.src = "https://picsum.photos/id/" + id + "/" + r + "/" + l;
+                document.body.appendChild(img);
+            }
+        }
+    </script>
+
+</body>
+</html>
