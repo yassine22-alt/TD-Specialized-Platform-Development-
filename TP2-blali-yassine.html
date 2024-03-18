@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+    <style>
+        .exo1{
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .field {
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }
+        .exo2 {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<h1>TP2-BLALI-Yassine</h1>
+
+<h1>exercice 1</h1>
+<div class="exo1">
+    <input type="text" style="margin-right: 10px;" id="num1">
+    <p style="margin-right: 10px">+</p>
+    <input type="text" style="margin-right: 10px;" id="num2">
+    <p style="margin-right: 10px;">=</p>
+    <span id="result"></span>
+    <button style="margin-left: 20px;" id="myButton1">Calculer</button>
+    
+</div>
+
+<h1>exercice 2</h1>
+<div class="exo1">
+    <input type="text" style="margin-right: 10px;" id="num3">
+    <input type="text" style="margin-right: 10px;" id="num4">
+   
+    <button style="margin-left: 10px;" id="myButton2">Permuter</button>
+</div>
+
+<h1>exercice 3</h1>
+<div class="exo1">
+    <input type="text" style="margin-right: 10px;" id="num5" placeholder="Saisir le premier nombre">
+    <input type="text" style="margin-right: 10px;" id="num6" placeholder="Saisir le second nombre">
+    <select name="op1" id="op1" required style="margin-right: 10px;">
+        <option value="">Choisir Operation</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <p style="margin-right: 10px;">=</p>
+    <span id="result1"></span>
+    <button style="margin-left: 20px;" id="myButton3">Calculer</button>
+</div>
+<h1>exercie 4</h1>
+<div class="exo1">
+    <button onclick="prompty()">Saisir</button>
+</div>
+
+<h1>exercice 5</h1>
+<div class="exo1">
+    <button onclick="ttctva()">Calculer TTC</button>
+    <p  id="res"></p>
+</div>
+
+<h1>exercice 6</h1>
+<div class="exo2">
+    <h2>Formulaire de contact</h2>
+    <div class="field">
+        <p>email : </p>
+        <input type="text" id="email">
+    </div>
+    <div class="field">
+        <p>objet : </p>
+        <input type="text" id="objet">
+    </div>
+    <div class="field">
+        <label for="message">corps:</label><br>
+        <textarea id="message" name="message" rows="4"></textarea><br>
+    </div>
+    <button id="myButton4" onclick="submit">Envoyer l'email</button>
+
+    <div class="result" style="display: none;">
+        <p><strong>Sender:</strong> <span id="resultEmail"></span></p>
+        <p><strong>Objet:</strong> <span id="resultSubject"></span></p>
+        <p><strong>Corps de l'email:</strong> <span id="resultMessage"></span></p>
+    </div>
+        
+</div>
+
+<h1>exercice 7</h1>
+<a href="https://devdocs.io/javascript/" id="link">Cliquez ici</a>
+
+<div id="menuTrigger" style="width: 200px; height: 100px;">
+    Cliquez ici pour le menu
+</div>
+
+<div id="menu" style="display: none; position: absolute;">
+    <li>Python</li>
+    <li>JS</li>
+    <li>Assembly</li>
+</div>
+<script>
+
+    document.getElementById("link").addEventListener('click',function(event){
+        event.preventDefault();
+        alert('Redirection interdite');
+    })
+
+    var menuTrigger = document.getElementById("menuTrigger");
+    var menu = document.getElementById("menu");
+    menuTrigger.addEventListener('click',function(){
+        menu.style.display = 'block';
+    })
+    menuTrigger.addEventListener('mouseleave',function(){
+        menu.style.display = 'none';
+    })
+    const button3 = document.getElementById("myButton4");
+    button3.addEventListener('click', function(){
+        var email = document.getElementById("email").value;
+        var subject = document.getElementById("objet").value;
+        var message = document.getElementById("message").value;
+
+        document.getElementById("resultEmail").textContent = email;
+        document.getElementById("resultSubject").textContent = subject;
+        document.getElementById("resultMessage").textContent = message;
+
+        document.querySelector(".result").style.display="block";
+
+    })
+
+
+    function prompty(){        
+        let a = parseInt(prompt("enter number a: "));
+        let b = parseInt(prompt("enter number b: "));
+        let c = parseInt(prompt("enter number c: "));
+        if(isNaN(a) || isNaN(b) || isNaN(c)){
+            alert("Veuillez saisir des valuers valides");
+            return;
+        }
+        if(a==b && b==c){
+            alert("Les trois variables sont identiques");
+        }
+        if((a==b && a != c) || (b==c && a != b)){
+            alert("Deux des variables sont de valeurs égales.");
+        }
+        if(a!=b && b != c && a!=c){
+            alert("Les trois variables sont différentes.")
+        }
+
+    }
+    function ttctva(){
+            let price = parseFloat(prompt("entrez le prix HT"));
+            let taux = parseFloat(prompt("entrez le taux du TVA en pourcentage"));
+            if(!isNaN(price) && !isNaN(taux)){
+                document.getElementById("res").textContent = "Le prix TTC est de: " + (1+taux/100)*price +"MAD";
+            }else{
+                document.getElementById("res").textContent = "Veuillez entrer des valeurs valide.";
+            }
+        }
+        const button = document.getElementById("myButton1");
+        button.addEventListener('click', function() {
+            
+            var i1 = document.getElementById("num1").value;
+            var i2 = document.getElementById("num2").value;
+            
+            if(isNaN(i1) || isNaN(i2)){
+                document.getElementById("result").textContent = "Entrer des valeurs valides";
+                return;
+            }
+            var sum = parseInt(i1) + parseInt(i2);
+            document.getElementById("result").textContent = sum;
+        });
+        const button1 = document.getElementById("myButton2");
+        button1.addEventListener('click', function() {
+            var i1 = document.getElementById("num3").value;
+            var i2 = document.getElementById("num4").value;
+            document.getElementById("num3").value = i2;
+            document.getElementById("num4").value = i1;
+        })
+        const button2 = document.getElementById("myButton3");
+        button2.addEventListener('click', function(){
+            var i1 = parseFloat(document.getElementById("num5").value);
+            var i2 = parseFloat(document.getElementById("num6").value);
+            var op1 = document.getElementById("op1").value;
+            if (isNaN(i1) || isNaN(i2) || op1 === "") {
+                alert("Veuillez remplir tous les champs.");
+                return;
+            }
+            var result;
+            switch(op1){
+                case "+":
+                    result = i1+i2;
+                    break;
+                case "-":
+                    result = i1-i2;
+                    break;
+
+                case "*":
+                    result = i1*i2;
+                    break;
+                case "/":
+                    if(i2==0){
+                        alert("division by zero is impossible");
+                        return;
+                    }
+                    result = i1/i2;
+                    break;
+            }
+            console.log(result);
+            document.getElementById("result1").textContent = result;
+            
+        });
+    
+       
+</script>
+</body>
+</html>
